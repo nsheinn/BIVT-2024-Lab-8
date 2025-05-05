@@ -13,6 +13,7 @@ namespace Lab_8
         {
             _output = [];
         }
+        public int Output => _output;
 
         public override void Review()
         {
