@@ -8,15 +8,29 @@ namespace Lab_8
 {
     public class Blue_3 : Blue
     {
-        (char, double)[] _output;
+        private (char, double)[] _output;
+
+        public (char, double)[] Output
+        {
+            get
+            {
+                (char, double)[] copy = new (char, double)[_output.Length];
+                Array.Copy(copy,_output, copy.Length);
+                return copy;
+            }
+        }
         public Blue_3(string input) : base(input)
         {
             _output = [];
         }
-        public int Output => _output;
 
         public override void Review()
         {
+            if (string.IsNullOrEmpty(_input))
+            {
+                _output = null;
+                return;
+            }
             char[] separators = { ' ', '.', '!', '?', ',', ':', '\"', ';', '–', '(', ')', '[', ']', '{', '}', '/' };
 
             string[] words = _input.Split(separators, StringSplitOptions.RemoveEmptyEntries);
@@ -58,6 +72,7 @@ namespace Lab_8
         }
         public override string ToString()
         {
+            if (_output == null) return null;
             string answer = "";
             for (int i = 0; i < _output.Length; i++)
             {
