@@ -9,7 +9,7 @@ namespace Lab_8
     public class Blue_1 : Blue
     {
         private string[] _output;
-        public string[] Output => _output;
+        public string[] Output => _output?.ToArray();
         public Blue_1(string input) : base(input)
         {
             _output = null;
@@ -19,27 +19,28 @@ namespace Lab_8
             if (string.IsNullOrEmpty(_input)) return;
             string[] words = _input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             string[] allLines = new string[words.Length];
-            string newLine = "";
-            int countLines = 0;
+            string currentLine = "";
+            int lineCount = 0;
             foreach (string word in words)
             {
-                if (newLine == "") newLine = word;
-                else if (newLine.Length + word.Length + 1 <= 50)
+                if (currentLine.Length == 0) currentLine = word;
+                else if (currentLine.Length + word.Length + 1 <= 50)
                 {
-                    newLine += " " + word;
+                    currentLine += " " + word;
                 }
                 else
                 {
-                    allLines[countLines++] = newLine;
-                    newLine = word;
+                    allLines[lineCount++] = currentLine;
+                    currentLine = word;
                 }
             }
-            if (newLine != "")
+            if (currentLine.Length > 0)
             {
-                allLines[countLines++] = newLine;
+                allLines[lineCount++] = currentLine;
             }
-            _output = new string[countLines];
+            _output = new string[lineCount];
             Array.Copy(allLines, _output, _output.Length);
+
         }
         public override string ToString()
         {

@@ -10,18 +10,10 @@ namespace Lab_8
     {
         private (char, double)[] _output;
 
-        public (char, double)[] Output
-        {
-            get
-            {
-                (char, double)[] copy = new (char, double)[_output.Length];
-                Array.Copy(copy,_output, copy.Length);
-                return copy;
-            }
-        }
+        public (char, double)[] Output => _output?.ToArray();
         public Blue_3(string input) : base(input)
         {
-            _output = [];
+            _output = null;
         }
 
         public override void Review()
