@@ -10,7 +10,7 @@ namespace Lab_8
     {
         private (char, double)[] _output;
 
-        public (char, double)[] Output => _output?.ToArray();
+        public (char, double)[] Output => ((char, double)[])_output?.Clone();
         public Blue_3(string input) : base(input)
         {
             _output = null;
